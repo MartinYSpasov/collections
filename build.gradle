@@ -1,0 +1,29 @@
+group 'collections'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext.mockitoVersion          = "1.9.5"
+ext.junitVersion            = "4.11"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile group: 'org.mockito', name: 'mockito-all', version:"${mockitoVersion}"
+
+    testCompile group: 'org.mockito', name: 'mockito-all', version: "${mockitoVersion}"
+    testCompile group: 'junit', name: 'junit', version: "${junitVersion}"
+}
+test {
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
